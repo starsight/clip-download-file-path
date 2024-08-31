@@ -1,0 +1,24 @@
+{
+	"manifest_version": 3,
+	"name": "ClipDownloadPath",
+	"version": "1.0",
+	"description": "Write download file path to clipboard",
+	"author": "xianxian.hwj",
+	"icons":
+	{
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+  "permissions": [
+    "downloads",
+    "notifications",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+	  "background": {
+    "service_worker": "background.js"
+  }
+}
