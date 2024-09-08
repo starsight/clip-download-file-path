@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项设置</title>
+    <style>
+        /* 简单样式 */
+        body { font-family: Arial, sans-serif; }
+        .tab { cursor: pointer; padding: 10px; display: inline-block; }
+        .content { display: none; }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="tab" onclick="showTab('settings')">基本设置</div>
+        <div class="tab" onclick="showTab('rules')">规则</div>
+        <div class="tab" onclick="showTab('feedback')">反馈</div>
+    </div>
+    <div id="settings" class="content">基本设置内容</div>
+    <div id="rules" class="content">规则内容</div>
+    <div id="feedback" class="content">反馈内容</div>
+
+    <script>
+        function showTab(tabName) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.style.display = 'none');
+            document.getElementById(tabName).style.display = 'block';
+        }
+        // 默认显示基本设置
+        showTab('settings');
+    </script>
+</body>
+</html>

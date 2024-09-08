@@ -18,3 +18,7 @@ function copyToClipboard(text) {
         console.error('复制到剪贴板失败:', err);
     });
 }
+
+document.getElementById('optionsButton').addEventListener('click', function() {
+    chrome.runtime.openOptionsPage(); // 打开选项页面
+});

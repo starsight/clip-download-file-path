@@ -23,7 +23,8 @@
     "default_popup": "popup.html",  
     "default_icon": "icon.png"
   },
-	  "background": {
+  "background": {
     "service_worker": "background.js"
-  }
+  },
+  "options_page": "option.html"
 }
