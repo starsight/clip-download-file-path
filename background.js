@@ -52,33 +52,34 @@ function handleClipboardError(errorMessage) {
   notifyUser('复制文件路径失败: ' + errorMessage);
 }
 
-// 这个函数将在内容脚本中执行
 function textToClipboard(text) {
-  // 确保文档获得焦点
-  document.activeElement.blur(); // 先失去焦点
-  document.body.focus(); // 然后聚焦到 body
-
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
-      console.log('路径已复制到剪贴板, path: ' + text);
+      console.log('主方案 copy to clipboard successfully');
     }).catch(err => {
-      console.error('使用 navigator.clipboard 复制失败:', err);
+      console.error('主方案 Failed to copy!!: ', err);
       // 回退到 document.execCommand('copy')
       fallbackCopyToClipboard(text);
     });
   } else {
-    fallbackCopyToClipboard(text);
+      // 回退到 document.execCommand('copy')
+      fallbackCopyToClipboard(text);
   }
-
 
   function fallbackCopyToClipboard(text) {
     const textArea = document.createElement("textarea");
     textArea.value = text;
     document.body.appendChild(textArea);
+    // textArea.focus();
     textArea.select();
-    document.execCommand('copy');
+    try {
+      const successful = document.execCommand('copy');
+      const msg = successful ? 'successful' : 'unsuccessful';
+      console.log('备用方案 copy to clipboard ' + msg);
+    } catch (err) {
+      console.error('备用方案: Failed to copy', err);
+    }
     document.body.removeChild(textArea);
-    console.log('使用 document.execCommand 复制成功, path: ' + text);
   }
 }
 
