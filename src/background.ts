@@ -59,9 +59,24 @@ function escapeSpecialChars(str: string): string {
     // Windows系统: 在整个路径外层加上双引号
     return `"${str}"`;
   } else {
-    // 其他系统(Unix, Mac): 只转义空格
-    return str.replace(/ /g, '\\ ');
+    // 其他系统(Unix, Mac): 转义
+    return escapePath(str);
   }
+}
+
+function escapePath(path) {
+    const specialChars = [' ', '$', '\\', '"', "'", '*', '?', '(', ')', '{', '}', '[', ']', ';'];
+    let escapedPath = '';
+
+    for (let char of path) {
+        if (specialChars.includes(char)) {
+            escapedPath += '\\' + char;
+        } else {
+            escapedPath += char;
+        }
+    }
+
+    return escapedPath;
 }
 
 function copyToClipboard(text: string) {
